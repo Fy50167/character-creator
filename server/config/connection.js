@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/characterdb');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://fy50167:50167@cluster0.aqazdtw.mongodb.net/');
 
 const db = mongoose.connection;
 
