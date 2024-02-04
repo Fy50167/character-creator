@@ -12,6 +12,18 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+body,
+#root {
+    width: 100vw;
+    height: 100vh;
+    background: rgb(0, 78, 62);
+    background: linear-gradient(
+        315deg,
+        rgba(0, 78, 62, 0.8729866946778712) 0%,
+        rgba(67, 207, 204, 1) 100%
+    );
+}
+
 .stylized {
     font-family: 'MedievalSharp';
 }
