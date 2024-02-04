@@ -4,6 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* #47837d
+#021b34 */
+
 * {
     margin: 0;
     color: white;
@@ -16,14 +19,26 @@ body,
 #root {
     width: 100vw;
     height: 100vh;
-    background: rgb(0, 78, 62);
+    background: rgb(2, 27, 52);
     background: linear-gradient(
-        315deg,
-        rgba(0, 78, 62, 0.8729866946778712) 0%,
-        rgba(67, 207, 204, 1) 100%
+        135deg,
+        rgba(2, 27, 52, 1) 0%,
+        rgba(101, 161, 155, 1) 100%
     );
 }
 
 .stylized {
     font-family: 'MedievalSharp';
+}
+.nav-link {
+    transition: 0.2s;
+}
+
+.nav-link:hover {
+    color: #47837d;
+    opacity: 0.7;
+}
+
+.active {
+    color: #47837d !important;
 }
