@@ -4,16 +4,10 @@ export default function Navigation() {
     return (
         <>
             <NavLink id='about' to='/' className='gold nav-link'>
-                About
+                Home
             </NavLink>
-            <NavLink id='work' to='/projects' className='gold nav-link'>
-                Work
-            </NavLink>
-            <NavLink id='resume' to='/resume' className='gold nav-link'>
-                Resumé
-            </NavLink>
-            <NavLink id='contact' to='/contact' className='gold nav-link'>
-                Contact
+            <NavLink id='work' to='/creator' className='gold nav-link'>
+                Create
             </NavLink>
         </>
     );
