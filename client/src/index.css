@@ -46,3 +46,7 @@ body,
 .display-border {
     border-right: 1px solid grey;
 }
+
+.display-top {
+    border-top: 1px solid grey;
+}

@@ -78,7 +78,7 @@ export default function Header() {
                                             <Menu.Item>
                                                 {({ active }) => (
                                                     <a
-                                                        href='#'
+                                                        href='/profile'
                                                         className={classNames(
                                                             active
                                                                 ? 'bg-gray-100'
