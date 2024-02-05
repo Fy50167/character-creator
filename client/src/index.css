@@ -42,3 +42,7 @@ body,
 .active {
     color: #47837d !important;
 }
+
+.display-border {
+    border-right: 1px solid grey;
+}
