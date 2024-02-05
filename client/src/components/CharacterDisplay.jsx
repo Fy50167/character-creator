@@ -3,20 +3,20 @@ export default function CharacterDisplay(props) {
 
     return (
         <div
-            className={`w-full flex text-black text-lg p-4 text-center ${
+            className={`w-full flex text-black text-sm md:text-lg py-4 text-center ${
                 bold ? 'font-bold' : ''
             }`}
         >
-            <div className='w-1/4 text-inherit display-border'>
+            <div className='w-1/4 px-2 text-inherit display-border flex items-center justify-center'>
                 <p className='text-inherit'>{creator}</p>
             </div>
-            <div className='w-1/4 text-inherit display-border'>
+            <div className='w-1/4 px-2 text-inherit display-border flex items-center justify-center'>
                 <p className='text-inherit'>{name}</p>
             </div>
-            <div className='w-1/4 text-inherit display-border'>
+            <div className='w-1/4 px-2 text-inherit display-border flex items-center justify-center'>
                 <p className='text-inherit'>{race}</p>
             </div>
-            <div className='w-1/4 text-inherit'>
+            <div className='w-1/4 px-2 text-inherit flex items-center justify-center'>
                 <p className='text-inherit'>{date}</p>
             </div>
         </div>
