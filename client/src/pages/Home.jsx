@@ -4,9 +4,9 @@ export default function Home() {
     return (
         <section className='w-full h-full flex flex-col justify-center items-center'>
             <div className='text-center'>
-                <h2 className='stylized text-xl md:text-4xl'>
+                <h1 className='stylized text-xl md:text-4xl'>
                     Welcome to the Character Creator!
-                </h2>
+                </h1>
             </div>
 
             <div className='flex flex-col justify-center items-center w-4/5 mt-10'>
