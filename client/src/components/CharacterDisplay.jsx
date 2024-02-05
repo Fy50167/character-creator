@@ -3,7 +3,7 @@ export default function CharacterDisplay(props) {
 
     return (
         <div
-            className={`w-full flex text-black text-sm md:text-lg py-4 display-top text-center ${
+            className={`w-full flex text-black text-xs md:text-lg py-4 display-top text-center ${
                 bold ? 'font-bold' : ''
             }`}
         >
