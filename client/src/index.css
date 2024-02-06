@@ -90,3 +90,7 @@ body,
 .btn:hover {
     cursor: pointer;
 }
+
+.character-div {
+    max-width: 1200px;
+}
