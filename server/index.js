@@ -9,18 +9,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(apiRoutes);
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/dist")));
+const indexPath = path.join(__dirname, "../client/index.html");
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/dist/index.html"));
-  });
-} else {
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/index.html"));
-  });
-}
+app.use(express.static(path.join(__dirname, "../client/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+});
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running at http://localhost:${PORT}`);
 });

@@ -7,7 +7,10 @@ export default function Profile() {
             <h1 className='text-lg md:text-3xl'>Your Profile</h1>
             <div className='bg-white w-4/5 h-auto md:h-1/3 p-4 rounded-md flex flex-col md:flex-row'>
                 <div className='w-full md:w-1/2 p-4'>
-                    <img src={PERSON} className='m-auto h-auto w-1/2 circle' />
+                    <img
+                        src={PERSON}
+                        className='m-auto h-auto w-1/2 circle image'
+                    />
                 </div>
 
                 <div className='flex flex-col p-4 w-full md:w-1/2 justify-evenly items-start'>
