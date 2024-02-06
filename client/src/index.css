@@ -61,8 +61,16 @@ body,
     max-width: 240px;
 }
 
+.canvas {
+    display: flex;
+    justify-items: center;
+}
+
 .canvas > div {
     border-radius: 5px;
+    max-width: 520px;
+    margin: auto;
+    border: 1px solid black;
 }
 
 .btn {
