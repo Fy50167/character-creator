@@ -60,3 +60,25 @@ body,
 .image {
     max-width: 240px;
 }
+
+.canvas > div {
+    border-radius: 5px;
+}
+
+.btn {
+    background-color: lightblue;
+    border-radius: 5px;
+    padding: 1%;
+    border: 0.5px solid black;
+    color: black;
+    margin: 5px 0;
+    white-space: nowrap;
+    width: 80px;
+    font-size: 16px;
+    transition: 0.2s;
+    margin-right: 5px;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
