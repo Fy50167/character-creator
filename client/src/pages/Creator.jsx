@@ -17,8 +17,8 @@ export default function Creator() {
     ];
 
     return (
-        <div className='w-full h-full flex justify-center items-center'>
-            <div className='bg-white w-5/6 character-div h-auto md:h-4/5 rounded-md'>
+        <div className='w-full grow flex justify-center items-center'>
+            <div className='bg-white my-8 md:m-auto; w-5/6 character-div h-auto rounded-md'>
                 <div className='w-full h-1/2 flex flex-col md:flex-row'>
                     <div className='w-full md:w-1/2 h-full p-4 rounded-md canvas'>
                         <Canvas
@@ -37,11 +37,11 @@ export default function Creator() {
                         <Loader />
                     </div>
                     <div className='w-full md:w-1/2 flex flex-col justify-evenly items-start p-4'>
-                        <div>
+                        <div className='creator-top'>
                             <h2 className='text-black font-bold'>Name</h2>
                             <p className='text-black'>Default Name</p>
                         </div>
-                        <div>
+                        <div className='creator-bottom'>
                             <h2 className='text-black font-bold'>Class</h2>
                             <div className='flex flex-wrap'>
                                 {classes.map((button) => (

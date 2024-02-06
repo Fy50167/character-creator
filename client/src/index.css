@@ -15,10 +15,14 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-body,
+body {
+    height: 100vh;
+}
+
 #root {
     width: 100vw;
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
     background: rgb(2, 27, 52);
     background: linear-gradient(
         135deg,
@@ -93,4 +97,15 @@ body,
 
 .character-div {
     max-width: 1200px;
+    min-height: 600px;
+}
+
+.creator-top {
+    border-top: 10px ridge black;
+    width: 90%;
+}
+
+.creator-bottom {
+    border-bottom: 10px ridge black;
+    width: 90%;
 }
