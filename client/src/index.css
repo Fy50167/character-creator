@@ -97,15 +97,21 @@ body {
 
 .character-div {
     max-width: 1200px;
-    min-height: 600px;
+    min-height: 700px;
 }
 
 .creator-top {
     border-top: 10px ridge black;
-    width: 90%;
+    width: 100%;
 }
 
 .creator-bottom {
     border-bottom: 10px ridge black;
-    width: 90%;
+    width: 100%;
+}
+
+.center {
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 2rem);
 }

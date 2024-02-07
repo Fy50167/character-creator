@@ -18,9 +18,12 @@ export default function Creator() {
 
     return (
         <div className='w-full grow flex justify-center items-center'>
-            <div className='bg-white my-8 md:m-auto; w-5/6 character-div h-auto rounded-md'>
+            <div className='bg-white relative my-8 pb-10 md:m-auto w-5/6 character-div h-auto rounded-md'>
+                <div className='absolute bottom-0 h-10 text-right creator-top center'>
+                    <p className='text-black'>Save</p>
+                </div>
                 <div className='w-full h-1/2 flex flex-col md:flex-row'>
-                    <div className='w-full md:w-1/2 h-full p-4 rounded-md canvas'>
+                    <div className='w-full md:w-1/2 flex flex-col grow p-4 rounded-md canvas'>
                         <Canvas
                             shadows
                             camera={{
@@ -60,7 +63,7 @@ export default function Creator() {
                         </div>
                     </div>
                 </div>
-                <div className='w-full p-4 md:p-8 flex flex-col justify-start'>
+                <div className='w-full h-1/2 p-4 md:p-8 flex flex-col justify-start'>
                     <h2 className='text-black font-bold'>Description</h2>
                     <p className='text-black'>
                         "Sed ut perspiciatis unde omnis iste natus error sit
