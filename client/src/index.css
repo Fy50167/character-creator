@@ -115,3 +115,7 @@ body {
     transform: translateX(-50%);
     width: calc(100% - 2rem);
 }
+
+.save-icon {
+    color: black !important;
+}
