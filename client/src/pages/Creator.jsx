@@ -5,7 +5,7 @@ import { Loader } from '@react-three/drei';
 
 export default function Creator() {
     const [name, setName] = useState('');
-    const [myClass, setMyClass] = useState('Wizard');
+    const [myClass, setMyClass] = useState('Warrior');
     const classes = [
         'Warrior',
         'Wizard',

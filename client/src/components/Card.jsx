@@ -2,11 +2,13 @@ import { useState, useRef } from 'react';
 import { easing } from 'maath';
 import { useFrame } from '@react-three/fiber';
 import { Image } from '@react-three/drei';
+import { useNavigate } from 'react-router-dom';
 import * as THREE from 'three';
 import '../util';
 
 export default function Card({ url, ...props }) {
     const ref = useRef();
+    const navigate = useNavigate();
     const [hovered, hover] = useState(false);
     const pointerOver = (e) => (e.stopPropagation(), hover(true));
     const pointerOut = () => hover(false);
@@ -28,6 +30,10 @@ export default function Card({ url, ...props }) {
         );
     });
 
+    const goToHere = () => {
+        navigate('/new-route');
+    };
+
     return (
         <Image
             ref={ref}
@@ -36,6 +42,7 @@ export default function Card({ url, ...props }) {
             side={THREE.DoubleSide}
             onPointerOver={pointerOver}
             onPointerOut={pointerOut}
+            onClick={goToHere}
             {...props}
         >
             <bentPlaneGeometry args={[0.1, 1, 1, 20, 20]} />

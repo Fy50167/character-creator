@@ -1,6 +1,6 @@
 import Card from './Card';
 
-export default function Carousel({ radius = 1.4, count = 8 }) {
+export default function Carousel({ radius = 1.4, count = 7 }) {
     return Array.from({ length: count }, (_, i) => (
         <Card
             key={i}
