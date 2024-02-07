@@ -77,6 +77,18 @@ body {
     border: 1px solid black;
 }
 
+.home-canvas {
+    height: 480px;
+}
+
+.home-canvas > div {
+    border-radius: 0.375rem;
+}
+
+.home-canvas > div > div > div::-webkit-scrollbar {
+    display: none !important;
+}
+
 .btn {
     background-color: lightblue;
     border-radius: 5px;

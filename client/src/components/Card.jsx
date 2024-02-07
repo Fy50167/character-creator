@@ -1,4 +1,9 @@
 import { useState, useRef } from 'react';
+import { easing } from 'maath';
+import { useFrame } from '@react-three/fiber';
+import { Image } from '@react-three/drei';
+import * as THREE from 'three';
+import '../util';
 
 export default function Card({ url, ...props }) {
     const ref = useRef();
@@ -22,6 +27,7 @@ export default function Card({ url, ...props }) {
             delta
         );
     });
+
     return (
         <Image
             ref={ref}

@@ -1,7 +1,9 @@
 import { useRef } from 'react';
 import { useScroll } from '@react-three/drei';
+import { easing } from 'maath';
+import { useFrame } from '@react-three/fiber';
 
-function Rig(props) {
+export default function Rig(props) {
     const ref = useRef();
     const scroll = useScroll();
     useFrame((state, delta) => {
