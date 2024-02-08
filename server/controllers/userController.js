@@ -2,16 +2,6 @@ const { User, Character} = require('../models');
 const { signToken } = require('../utils/auth');
 
 module.exports = {
-    async getUsers(req, res) {
-        try {
-            const users = await User.find().select('-__v');
-
-            res.json(users);
-        } catch (err) {
-            console.log(err);
-            return res.status(500).json(err);
-        }
-    },
 
     async getSingleUser(req, res) {
         try {
