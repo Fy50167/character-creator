@@ -1,37 +1,46 @@
 import { useState } from 'react';
+import { createUser } from '../utils/API';
+import Auth from '../utils/auth';
 
 export default function Signup() {
-    const [formState, setFormState] = useState({
+    const [userFormData, setUserFormData] = useState({
         username: '',
         email: '',
         password: '',
     });
+    const [validated] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
 
-    const handleChange = (event) => {
+    const handleInputChange = (event) => {
         const { name, value } = event.target;
-
-        setFormState({
-            ...formState,
-            [name]: value,
-        });
+        setUserFormData({ ...userFormData, [name]: value });
     };
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(formState);
 
-        try {
-            const { data } = await addUser({
-                variables: { ...formState },
-            });
-
-            console.log(data.addUser.user, data.addUser.token);
-            Auth.login(data.addUser.token);
-        } catch (e) {
-            console.error(e);
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
         }
 
-        setFormState({
+        try {
+            const response = await createUser(userFormData);
+
+            if (!response.ok) {
+                throw new Error('something went wrong!');
+            }
+
+            const { token, user } = await response.json();
+            console.log(user);
+            Auth.login(token);
+        } catch (err) {
+            console.error(err);
+            setShowAlert(true);
+        }
+
+        setUserFormData({
             username: '',
             email: '',
             password: '',
@@ -55,12 +64,12 @@ export default function Signup() {
                     </div>
                     <div className='md:w-2/3'>
                         <input
-                            onChange={handleChange}
+                            onChange={handleInputChange}
                             className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'
                             id='username'
                             name='username'
                             type='text'
-                            defaultValue={formState.username}
+                            defaultValue={userFormData.username}
                             placeholder='jane_doe'
                         />
                     </div>
@@ -76,12 +85,12 @@ export default function Signup() {
                     </div>
                     <div className='md:w-2/3'>
                         <input
-                            onChange={handleChange}
+                            onChange={handleInputChange}
                             className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'
                             id='email-address'
                             name='email'
                             type='text'
-                            defaultValue={formState.email}
+                            defaultValue={userFormData.email}
                             placeholder='email@gmail.com'
                         />
                     </div>
@@ -97,12 +106,12 @@ export default function Signup() {
                     </div>
                     <div className='md:w-2/3'>
                         <input
-                            onChange={handleChange}
+                            onChange={handleInputChange}
                             className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'
                             id='password'
                             name='password'
                             type='password'
-                            defaultValue={formState.password}
+                            defaultValue={userFormData.password}
                             placeholder='*********'
                         />
                     </div>
