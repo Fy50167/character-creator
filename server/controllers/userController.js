@@ -1,5 +1,5 @@
 const { User, Character} = require('../models');
-
+const { signToken } = require('../utils/auth');
 
 module.exports = {
     async getUsers(req, res) {
@@ -35,7 +35,8 @@ module.exports = {
     async createUser(req, res) {
         try {
           const user = await User.create(req.body);
-          res.json(user);
+          const token = signToken(user);
+          res.json({ token, user });
         } catch (err) {
           res.status(500).json(err);
         }
@@ -73,5 +74,22 @@ module.exports = {
         } catch (err) {
           res.status(500).json(err);
         }
-      }
+    },
+
+    async login(req, res) {
+        const user = await User.findOne({
+            email: req.body.email
+        });
+        if (!user) {
+            return res.status(400).json({ message: "Can't find this user" });
+        }
+
+        const correctPw = await user.isCorrectPassword(req.body.password);
+
+        if (!correctPw) {
+            return res.status(400).json({ message: 'Wrong password!' });
+        }
+        const token = signToken(user);
+        res.json({ token, user });
+    },
 }
