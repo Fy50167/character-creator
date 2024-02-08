@@ -1,77 +1,93 @@
-const { User, Character} = require('../models');
+const { User, Character } = require('../models');
 
 
 module.exports = {
-    async getUsers(req, res) {
+    async getCharacters(req, res) {
         try {
-            const users = await User.find().select('-__v');
+            const character = await Character.find().select('-__v');
 
-            res.json(users);
+            res.json(character);
         } catch (err) {
             console.log(err);
             return res.status(500).json(err);
         }
     },
 
-    async getSingleUser(req, res) {
+    async getSingleCharacter(req, res) {
         try {
-            const user = await User.findOne({
-                _id: req.params.userId
+            const character = await Character.findOne({
+                _id: req.params.characterId
             }).select('-__v');
 
-            if (!user) {
+            if (!character) {
                 return res.status(404).json({
-                    message: 'No users with that ID!'
+                    message: 'No characters with that ID!'
                 })
             }
 
-            res.json(user)
+            res.json(character)
         } catch (err) {
             console.log(err);
             return res.status(500).json(err);
         }
     },
 
-    async createUser(req, res) {
+    async createCharacter(req, res) {
         try {
-          const user = await User.create(req.body);
-          res.json(user);
+          const character = await Character.create(req.body);
+
+          const user = await User.findOneAndUpdate(
+            { _id: req.body.userId },
+            { $push: { Characters: character } },
+            { runValidators: true, new: true }
+          );
+
+          res.json(character);
         } catch (err) {
           res.status(500).json(err);
         }
     },
 
-    async updateUser(req,res) {
+    async updateCharacter(req,res) {
         try {
-            const user = await User.findOneAndUpdate(
-                { _id: req.params.userId },
-                { $set: req.body },
-                { runValidators: true, new: true }
+            const character = await Character.findOneAndUpdate(
+              { _id: req.params.characterId },
+              { $set: req.body },
+              { runValidators: true, new: true }
             );
     
-            if (!user) {
-            res.status(404).json({ message: 'No user with this ID!' });
+            if (!character) {
+              res.status(404).json({ message: 'No character with this ID!' });
             }
     
-            res.json(user);
+            res.json(character);
         } catch (err) {
             res.status(500).json(err);
         }
     },
 
-    async deleteUser(req, res) {
+    async deleteCharacter(req, res) {
         try {
-          const user = await User.findOneAndDelete({ _id: req.params.userId });
+          const character = await Character.findOneAndDelete({ _id: req.params.characterId });
     
-          if (!user) {
-            res.status(404).json({ message: 'No user with this ID!' });
+          if (!character) {
+            res.status(404).json({ message: 'No character with this ID!' });
           }
-    
-          await Character.deleteMany({ _id: { $in: user.characters } });
 
-          res.json({ message: 'User and all associated characters deleted.' });
+          if (!req.body.userId) {
+            res.status(404).json({ message: 'Please specify the user that this is being deleted from!' })
+          }
+
+          const user = await User.findOneAndUpdate(
+            { _id: req.body.userId },
+            { $pull: { characters: req.params.characterId } },
+            { runValidators: true, new: true }
+          );
+
+          res.json({ message: 'Character has been deleted.' });
         } catch (err) {
           res.status(500).json(err);
         }
-      }
+    },
+
 }
