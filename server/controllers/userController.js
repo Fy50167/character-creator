@@ -22,15 +22,15 @@ module.exports = {
         }
     },
 
-    async createUser(req, res) {
-        try {
-          const user = await User.create(req.body);
-          const token = signToken(user);
-          res.json({ token, user });
-        } catch (err) {
-          res.status(500).json(err);
+    async createUser({ body }, res) {
+        const user = await User.create(body);
+    
+        if (!user) {
+          return res.status(400).json({ message: 'Something is wrong!' });
         }
-    },
+        const token = signToken(user);
+        res.json({ token, user });
+      },
 
     async updateUser(req,res) {
         try {

@@ -13,7 +13,6 @@ const Login = (props) => {
         });
     };
 
-    // submit form
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         console.log(formState);
