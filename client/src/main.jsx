@@ -38,7 +38,7 @@ const router = createBrowserRouter([
                 element: <Profile />,
             },
             {
-                path: '/character',
+                path: '/character/:characterId',
                 element: <Character />,
             },
         ],

@@ -146,26 +146,29 @@ export default function Profile() {
             </div>
             <div className='flex flex-col grow w-full items-center'>
                 <h2 className='text-lg md:text-2xl mb-4'>Recent creations</h2>
-                <div className='bg-white flex flex-col grow h-1/3 rounded-md w-4/5'>
+                <div className='bg-white flex flex-col justify-baseline h-auto rounded-md w-4/5'>
                     <CharacterDisplay
                         creator='Creator'
                         name='Name'
                         race='Class'
                         date='Created On'
-                        bold={true}
+                        top={true}
                     />
                     {userData.characters &&
-                        userData.characters.map((character) => (
-                            <CharacterDisplay
-                                key={character._id}
-                                name={character.name}
-                                class={character.class}
-                                date={character.createdDate}
-                                race={character.class}
-                                creator={character.creator}
-                                bold={false}
-                            />
-                        ))}
+                        userData.characters
+                            .slice(-5)
+                            .map((character) => (
+                                <CharacterDisplay
+                                    key={character._id}
+                                    name={character.name}
+                                    class={character.class}
+                                    date={character.createdDate}
+                                    race={character.class}
+                                    creator={character.creator}
+                                    id={character._id}
+                                    top={false}
+                                />
+                            ))}
                 </div>
             </div>
         </div>
