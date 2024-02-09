@@ -5,7 +5,6 @@ const characterSchema = new Schema(
         name: {
             type: String,
             required: true,
-            minLength: 1,
             trim: true
         },
         class: {
@@ -15,9 +14,6 @@ const characterSchema = new Schema(
         description: {
             type: String,
             required: true,
-            maxLength: 250,
-            default: 'Give your character a description.',
-            minLength: 1
         },
         createdDate: {
             type: Date,
