@@ -28,7 +28,7 @@ const Login = (props) => {
     };
 
     return (
-        <div className='w-full h-full flex flex-col justify-center items-center'>
+        <div className='w-full h-full flex grow flex-col justify-center items-center'>
             <form
                 onSubmit={handleFormSubmit}
                 className='w-4/5 border bg-white shadow-lg rounded p-6'

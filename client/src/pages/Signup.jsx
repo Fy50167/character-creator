@@ -1,20 +1,13 @@
 import { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
-
 import { createUser } from '../utils/API';
 import Auth from '../utils/auth';
 
 export default function Signup() {
-    // set initial form state
     const [userFormData, setUserFormData] = useState({
         username: '',
         email: '',
         password: '',
     });
-    // set state for form validation
-    const [validated] = useState(false);
-    // set state for alert
-    const [showAlert, setShowAlert] = useState(false);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -24,7 +17,6 @@ export default function Signup() {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        // check if form has everything (as per react-bootstrap docs)
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
             event.preventDefault();
@@ -54,77 +46,72 @@ export default function Signup() {
     };
 
     return (
-        <>
-            {/* This is needed for the validation functionality above */}
-            <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-                {/* show alert if server response is bad */}
-                <Alert
-                    dismissible
-                    onClose={() => setShowAlert(false)}
-                    show={showAlert}
-                    variant='danger'
-                >
-                    Something went wrong with your signup!
-                </Alert>
-
-                <Form.Group className='mb-3'>
-                    <Form.Label htmlFor='username'>Username</Form.Label>
-                    <Form.Control
-                        type='text'
-                        placeholder='Your username'
+        <div className='w-full h-full flex grow flex-col justify-center items-center'>
+            <form
+                onSubmit={handleFormSubmit}
+                className='w-4/5 border bg-white shadow-lg rounded p-6'
+            >
+                <div className='mb-4'>
+                    <label
+                        className='block stylized text-gray-700 text-sm font-bold mb-2'
+                        htmlFor='username'
+                    >
+                        Username
+                    </label>
+                    <input
+                        onChange={handleInputChange}
+                        className='bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                        id='username'
                         name='username'
-                        onChange={handleInputChange}
-                        value={userFormData.username}
-                        required
+                        type='text'
+                        defaultValue={userFormData.username}
+                        placeholder='username'
                     />
-                    <Form.Control.Feedback type='invalid'>
-                        Username is required!
-                    </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group className='mb-3'>
-                    <Form.Label htmlFor='email'>Email</Form.Label>
-                    <Form.Control
-                        type='email'
-                        placeholder='Your email address'
+                </div>
+                <div className='mb-4'>
+                    <label
+                        className='block stylized text-gray-700 text-sm font-bold mb-2'
+                        htmlFor='email'
+                    >
+                        Email
+                    </label>
+                    <input
+                        onChange={handleInputChange}
+                        className='bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                        id='email'
                         name='email'
-                        onChange={handleInputChange}
-                        value={userFormData.email}
-                        required
+                        type='text'
+                        defaultValue={userFormData.email}
+                        placeholder='email'
                     />
-                    <Form.Control.Feedback type='invalid'>
-                        Email is required!
-                    </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group className='mb-3'>
-                    <Form.Label htmlFor='password'>Password</Form.Label>
-                    <Form.Control
-                        type='password'
-                        placeholder='Your password'
+                </div>
+                <div className='mb-4'>
+                    <label
+                        className='block stylized text-gray-700 text-sm font-bold mb-2'
+                        htmlFor='password'
+                    >
+                        Password
+                    </label>
+                    <input
+                        onChange={handleInputChange}
+                        className='bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                        id='password'
                         name='password'
-                        onChange={handleInputChange}
-                        value={userFormData.password}
-                        required
+                        type='text'
+                        defaultValue={userFormData.password}
+                        placeholder='password'
                     />
-                    <Form.Control.Feedback type='invalid'>
-                        Password is required!
-                    </Form.Control.Feedback>
-                </Form.Group>
-                <Button
-                    disabled={
-                        !(
-                            userFormData.username &&
-                            userFormData.email &&
-                            userFormData.password
-                        )
-                    }
-                    type='submit'
-                    variant='success'
-                >
-                    Submit
-                </Button>
-            </Form>
-        </>
+                </div>
+
+                <div className='flex items-center justify-between'>
+                    <button
+                        className='bg-blue-500 stylized hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                        type='submit'
+                    >
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
     );
 }
