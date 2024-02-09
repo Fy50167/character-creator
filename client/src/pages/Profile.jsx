@@ -1,6 +1,6 @@
 import PERSON from '../assets/images/stock-image.jpg';
 import CharacterDisplay from '../components/CharacterDisplay';
-import { getMe } from '../utils/API';
+import { getMe, updateUser } from '../utils/API';
 import Auth from '../utils/auth';
 import { useEffect, useState, useRef } from 'react';
 
@@ -11,6 +11,7 @@ export default function Profile() {
     const userDataLength = Object.keys(userData).length;
     const [username, setUsername] = useState('');
     const [tagline, setTagline] = useState('');
+    const initialRender = useRef(true);
 
     const handleUsernameChange = (input) => {
         setUsername(input);
@@ -49,8 +50,33 @@ export default function Profile() {
         };
 
         getUserData();
-        console.log(userData);
     }, [userDataLength]);
+
+    useEffect(() => {
+        if (initialRender.current) {
+            initialRender.current = false;
+            return;
+        }
+        const updateUserData = async () => {
+            try {
+                const response = await updateUser({
+                    username: username,
+                    tagline: tagline,
+                    userId: userData._id,
+                });
+
+                if (!response.ok) {
+                    throw new Error('something went wrong!');
+                }
+
+                const user = await response.json();
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        updateUserData();
+    }, [username, tagline, userData]);
 
     return (
         <div className='p-4 md:p-8 flex grow w-full h-full flex-col justify-evenly items-center'>
