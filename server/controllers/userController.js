@@ -3,21 +3,17 @@ const { signToken } = require('../utils/auth');
 
 module.exports = {
 
-    async getSingleUser(req, res) {
-        try {
-            const userEmail = req.query.email;
-            const user = await User.findOne({ email: userEmail }).select('-__v');
+    async getSingleUser({ user = null, params }, res) {
+        const foundUser = await User.findOne({
+          $or: [{ _id: user ? user._id : params.id }, { username: params.username }],
+        }).populate('characters');
     
-            if (!user) {
-                return res.status(404).json({ message: `No user found with email ${userEmail}` });
-            }
-    
-            res.json(user);
-        } catch (err) {
-            console.error(err);
-            return res.status(500).json({ message: 'Internal server error' });
+        if (!foundUser) {
+          return res.status(400).json({ message: 'Cannot find a user with this id!' });
         }
-    },
+    
+        res.json(foundUser);
+      },
 
     async createUser({ body }, res) {
         const user = await User.create(body);
