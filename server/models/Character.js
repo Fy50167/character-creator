@@ -18,9 +18,8 @@ const characterSchema = new Schema(
         createdDate: {
             type: Date,
             default: Date.now,
-            get: (date) => {
-                formattedDate = date.toDateString();
-                return formattedDate
+            get: function(date) {
+                return date.toLocaleDateString('en-US');
             }
         },
         creator: {
