@@ -38,12 +38,13 @@ module.exports = {
 
           const user = await User.findOneAndUpdate(
             { _id: req.body.userId },
-            { $push: { Characters: character } },
+            { $push: { characters: character } },
             { runValidators: true, new: true }
           );
 
           res.json(character);
         } catch (err) {
+          console.log('hit');
           res.status(500).json(err);
         }
     },

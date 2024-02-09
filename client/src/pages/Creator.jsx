@@ -3,6 +3,9 @@ import { Canvas } from '@react-three/fiber';
 import Experience from '../components/Experience';
 import { Loader } from '@react-three/drei';
 import { createCharacter } from '../utils/API';
+import Auth from '../utils/auth';
+import { jwtDecode } from 'jwt-decode';
+import Swal from 'sweetalert2';
 
 export default function Creator() {
     const nameRef = useRef(null);
@@ -32,8 +35,37 @@ export default function Creator() {
         input.current.focus();
     };
 
-    const submitCharacter = () => {
-        console.log(name, description, myClass);
+    const submitCharacter = async () => {
+        if (name === '' || description === '') {
+            Swal.fire({
+                title: `Couldn't create character.`,
+                text: 'Either your name or description were blank.',
+                icon: 'error',
+                confirmButtonText: 'Confirm',
+            });
+        }
+        try {
+            const token = jwtDecode(Auth.getToken());
+            const response = await createCharacter({
+                name: name,
+                description: description,
+                class: myClass,
+                creator: token.data.username,
+                userId: token.data._id,
+            });
+            console.log(response);
+            Swal.fire({
+                title: `Success!`,
+                text: `You've created a character! You can view/edit it in your profile.`,
+                icon: 'success',
+                confirmButtonText: 'Confirm',
+            });
+            setName('');
+            setDescription('');
+            setMyClass('Warrior');
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     return (
