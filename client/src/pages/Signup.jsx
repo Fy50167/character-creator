@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { createUser } from '../utils/API';
+import { createUser, getUser } from '../utils/API';
 import Auth from '../utils/auth';
+import Swal from 'sweetalert2';
 
 export default function Signup() {
     const [userFormData, setUserFormData] = useState({
@@ -35,7 +36,6 @@ export default function Signup() {
             Auth.login(token);
         } catch (err) {
             console.error(err);
-            setShowAlert(true);
         }
 
         setUserFormData({
@@ -64,7 +64,7 @@ export default function Signup() {
                         id='username'
                         name='username'
                         type='text'
-                        defaultValue={userFormData.username}
+                        value={userFormData.username}
                         placeholder='username'
                     />
                 </div>
@@ -81,8 +81,8 @@ export default function Signup() {
                         id='email'
                         name='email'
                         type='text'
-                        defaultValue={userFormData.email}
-                        placeholder='email'
+                        value={userFormData.email}
+                        placeholder='example@gmail.com'
                     />
                 </div>
                 <div className='mb-4'>
@@ -97,8 +97,8 @@ export default function Signup() {
                         className='bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                         id='password'
                         name='password'
-                        type='text'
-                        defaultValue={userFormData.password}
+                        type='password'
+                        value={userFormData.password}
                         placeholder='password'
                     />
                 </div>

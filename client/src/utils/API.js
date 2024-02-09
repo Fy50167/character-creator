@@ -6,6 +6,15 @@ export const getMe = (token) => {
       },
     });
   };
+
+  export const getUser = (userEmail) => {
+    const url = `/api/profile?email=${encodeURIComponent(userEmail)}`;
+    return fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  }
   
   export const createUser = (userData) => {
     return fetch('/api/profile', {
