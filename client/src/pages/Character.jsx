@@ -19,7 +19,7 @@ export default function Character() {
     let formattedDate = createdDate;
     const token = jwtDecode(Auth.getToken());
 
-    const deleteCharacter = async () => {
+    const handleDeleteCharacter = async () => {
         try {
             const token = jwtDecode(Auth.getToken());
             const response = await deleteCharacter(characterId, token.data._id);
@@ -29,6 +29,8 @@ export default function Character() {
                 text: `You've successfully deleted your character.`,
                 icon: 'success',
                 confirmButtonText: 'Confirm',
+            }).then(() => {
+                window.location.href = '/';
             });
         } catch (err) {
             console.error(err);
@@ -76,7 +78,7 @@ export default function Character() {
                                 strokeWidth={1.5}
                                 stroke='black'
                                 className='h-6 w-6 save-icon'
-                                onClick={deleteCharacter}
+                                onClick={handleDeleteCharacter}
                             >
                                 <path
                                     strokeLinecap='round'
