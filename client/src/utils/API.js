@@ -55,4 +55,8 @@ export const getMe = (token) => {
       body: JSON.stringify(characterData),
     });
   };
-  
+
+
+  export const getCharacter = (characterId) => {
+    return fetch(`/api/character/${characterId}`);
+  };
