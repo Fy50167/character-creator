@@ -1,6 +1,6 @@
 import { useEffect, useState, Suspense } from 'react';
 import { getCharacter, deleteCharacter } from '../utils/API';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Canvas } from '@react-three/fiber';
 import Experience from '../components/Experience';
 import { Loader } from '@react-three/drei';
@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { jwtDecode } from 'jwt-decode';
 
 export default function Character() {
+    const navigate = useNavigate();
     const { characterId } = useParams();
     const [characterData, setCharacterData] = useState({});
     const [createdDate, setCreatedDate] = useState('');
@@ -25,7 +26,7 @@ export default function Character() {
                 icon: 'success',
                 confirmButtonText: 'Confirm',
             }).then(() => {
-                window.location.href = '/';
+                navigate('/');
             });
         } catch (err) {
             console.error(err);

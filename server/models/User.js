@@ -7,30 +7,29 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      unique: true,
       required: true,
-      trim: true
+      trim: true,
+      unique: true
     },
     email: {
       type: String,
       required: true,
-      unique: true,
-      validate: {
-        validator: function(email) {
-          return /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(email);
-        },
-        message: 'Please enter a valid email address!'
-      }
+      unique: true
     },
     password: {
         type: String,
         required: true,
-        minlength: 5,
+        unique: false   
     },
     tagline: {
         type: String,
         required: true,
         default: 'This is your tagline.'
+    },
+    profilePicture: {
+      type: String,
+      required: true,
+      default: `/stock-image.jpg`
     },
     characters: [
       {

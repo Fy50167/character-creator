@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom';
 import Navigation from './Navigation';
 import LOGO from '../assets/images/logo.png';
 import Auth from '../utils/auth';
-import PERSON from '../assets/images/stock-image.jpg';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ');
@@ -62,7 +61,7 @@ export default function Header() {
                                                 </span>
                                                 <img
                                                     className='h-8 w-8 rounded-full'
-                                                    src={PERSON}
+                                                    src={`/stock-image.jpg`}
                                                     alt=''
                                                 />
                                             </Menu.Button>

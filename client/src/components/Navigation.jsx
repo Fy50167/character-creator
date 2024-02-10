@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import Auth from '../utils/auth';
 
 export default function Navigation() {
     return (
@@ -6,7 +7,11 @@ export default function Navigation() {
             <NavLink id='about' to='/' className='stylized nav-link'>
                 Home
             </NavLink>
-            <NavLink id='work' to='/creator' className='stylized nav-link'>
+            <NavLink
+                id='work'
+                to={Auth.loggedIn() ? '/creator' : '/login'}
+                className='stylized nav-link'
+            >
                 Create
             </NavLink>
         </>

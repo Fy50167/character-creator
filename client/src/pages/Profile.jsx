@@ -1,4 +1,3 @@
-import PERSON from '../assets/images/stock-image.jpg';
 import CharacterDisplay from '../components/CharacterDisplay';
 import { getMe, updateUser } from '../utils/API';
 import Auth from '../utils/auth';
@@ -85,7 +84,7 @@ export default function Profile() {
                 <div className='bg-white w-4/5 h-auto md:h-1/3 p-4 rounded-md flex flex-col md:flex-row'>
                     <div className='w-full md:w-1/2 p-4'>
                         <img
-                            src={PERSON}
+                            src={userData.profilePicture}
                             className='m-auto h-auto w-1/2 circle image'
                         />
                     </div>

@@ -18,17 +18,37 @@ export default function Signup() {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
+        if (Object.values(userFormData).some((value) => value === '')) {
+            Swal.fire({
+                title: `Whoops!`,
+                text: `It looks like one or more of the fields are empty.`,
+                icon: 'error',
+                confirmButtonText: 'Confirm',
+            });
+            setUserFormData({
+                username: '',
+                email: '',
+                password: '',
+            });
+            return;
         }
 
         try {
             const response = await createUser(userFormData);
-
+            console.log(userFormData);
             if (!response.ok) {
-                throw new Error('something went wrong!');
+                Swal.fire({
+                    title: `Whoops!`,
+                    text: `Looks like that email/username is already taken.`,
+                    icon: 'error',
+                    confirmButtonText: 'Confirm',
+                });
+                setUserFormData({
+                    username: '',
+                    email: '',
+                    password: '',
+                });
+                return;
             }
 
             const { token, user } = await response.json();
@@ -60,7 +80,7 @@ export default function Signup() {
                     </label>
                     <input
                         onChange={handleInputChange}
-                        className='bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                        className='bg-white shadow form-control appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                         id='username'
                         name='username'
                         type='text'
@@ -77,10 +97,10 @@ export default function Signup() {
                     </label>
                     <input
                         onChange={handleInputChange}
-                        className='bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                        className='bg-white shadow form-control appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                         id='email'
                         name='email'
-                        type='text'
+                        type='email'
                         value={userFormData.email}
                         placeholder='example@gmail.com'
                     />
@@ -94,7 +114,7 @@ export default function Signup() {
                     </label>
                     <input
                         onChange={handleInputChange}
-                        className='bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                        className='bg-white shadow form-control appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                         id='password'
                         name='password'
                         type='password'

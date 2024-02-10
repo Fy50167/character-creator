@@ -66,7 +66,7 @@ const Login = (props) => {
                         className='bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                         id='email-address'
                         name='email'
-                        type='text'
+                        type='email'
                         value={userFormData.email}
                         placeholder='example@gmail.com'
                     />

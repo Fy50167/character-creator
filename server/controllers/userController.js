@@ -16,6 +16,7 @@ module.exports = {
       },
 
     async createUser({ body }, res) {
+      try {
         const user = await User.create(body);
     
         if (!user) {
@@ -23,6 +24,10 @@ module.exports = {
         }
         const token = signToken(user);
         res.json({ token, user });
+      }  catch (err) {
+        res.status(500).json(err);
+      }
+      
       },
 
     async updateUser(req,res) {

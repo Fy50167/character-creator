@@ -4,10 +4,12 @@ import Experience from '../components/Experience';
 import { Loader } from '@react-three/drei';
 import { createCharacter } from '../utils/API';
 import Auth from '../utils/auth';
+import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
 
 export default function Creator() {
+    const navigate = useNavigate();
     const nameRef = useRef(null);
     const descriptionRef = useRef(null);
     const [name, setName] = useState('');
@@ -59,6 +61,8 @@ export default function Creator() {
                 text: `You've created a character! You can view/edit it in your profile.`,
                 icon: 'success',
                 confirmButtonText: 'Confirm',
+            }).then(() => {
+                navigate('/');
             });
             setName('');
             setDescription('');
