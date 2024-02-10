@@ -11,10 +11,6 @@ import { jwtDecode } from 'jwt-decode';
 export default function Character() {
     const { characterId } = useParams();
     const [characterData, setCharacterData] = useState({});
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [myClass, setMyClass] = useState('');
-    const [creator, setCreator] = useState('');
     const [createdDate, setCreatedDate] = useState('');
     let formattedDate = createdDate;
     const token = jwtDecode(Auth.getToken());
@@ -23,7 +19,6 @@ export default function Character() {
         try {
             const token = jwtDecode(Auth.getToken());
             const response = await deleteCharacter(characterId, token.data._id);
-            console.log(response);
             Swal.fire({
                 title: `Success!`,
                 text: `You've successfully deleted your character.`,
@@ -48,10 +43,6 @@ export default function Character() {
 
                 const character = await response.json();
                 setCharacterData(character);
-                setName(character.name);
-                setDescription(character.description);
-                setMyClass(character.class);
-                setCreator(character.creator);
                 setCreatedDate(character.createdDate);
             } catch (err) {
                 console.error(err);
@@ -62,14 +53,13 @@ export default function Character() {
     }, []);
 
     formattedDate = new Date(createdDate).toLocaleDateString('en-US');
-    console.log(creator);
-    console.log(token.data.username);
+    console.log(characterData);
 
     return (
         <div className='w-full grow flex justify-center items-center'>
             <div className='bg-white relative flex flex-col my-8 pb-12 md:m-auto w-5/6 character-div h-auto rounded-md'>
                 <div className='absolute bottom-0 h-12 text-right creator-top center flex items-center justify-end'>
-                    {creator === token.data.username && (
+                    {characterData.creator === token.data.username && (
                         <button>
                             <svg
                                 xmlns='http://www.w3.org/2000/svg'
@@ -101,7 +91,7 @@ export default function Character() {
                             resize={{ scroll: false }}
                         >
                             <Suspense fallback={null}>
-                                <Experience myClass={myClass} />
+                                <Experience myClass={characterData.myClass} />
                             </Suspense>
                         </Canvas>
                         <Loader />
@@ -112,13 +102,17 @@ export default function Character() {
                                 <h2 className='text-black font-bold relative'>
                                     Name
                                 </h2>
-                                <p className='text-black'>{name}</p>
+                                <p className='text-black'>
+                                    {characterData.name}
+                                </p>
                             </div>
                             <div className='flex flex-col w-full md:w-1/2'>
                                 <h2 className='text-black font-bold relative'>
                                     Creator
                                 </h2>
-                                <p className='text-black'>{creator}</p>
+                                <p className='text-black'>
+                                    {characterData.creator}
+                                </p>
                             </div>
                         </div>
                         <div className='creator-bottom flex'>
@@ -126,7 +120,9 @@ export default function Character() {
                                 <h2 className='text-black font-bold relative'>
                                     Class
                                 </h2>
-                                <p className='text-black'>{myClass}</p>
+                                <p className='text-black'>
+                                    {characterData.myClass}
+                                </p>
                             </div>
                             <div className='flex flex-col w-full md:w-1/2'>
                                 <h2 className='text-black font-bold relative'>
@@ -141,7 +137,7 @@ export default function Character() {
                     <div className='flex items-center'>
                         <h2 className='text-black font-bold'>Description</h2>
                     </div>
-                    <p className='text-black'>{description}</p>
+                    <p className='text-black'>{characterData.description}</p>
                 </div>
             </div>
         </div>

@@ -5,9 +5,8 @@ module.exports = {
     async getCharacters(req, res) {
         try {
             const character = await Character.find({
-              class: req.params.class
+              class: req.params.currentClass
             }).select('-__v');
-
             res.json(character);
         } catch (err) {
             console.log(err);
@@ -16,7 +15,9 @@ module.exports = {
     },
 
     async getSingleCharacter(req, res) {
+      console.log('hit');
         try {
+          console.log('hit');
             const character = await Character.findOne({
                 _id: req.params.characterId
             }).select('-__v');
