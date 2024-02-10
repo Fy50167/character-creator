@@ -42,7 +42,6 @@ export default function Character() {
                 }
 
                 const character = await response.json();
-                console.log(character);
                 setCharacterData(character);
                 setCreatedDate(character.createdDate);
             } catch (err) {
@@ -91,7 +90,7 @@ export default function Character() {
                             resize={{ scroll: false }}
                         >
                             <Suspense fallback={null}>
-                                <Experience myClass={characterData.myClass} />
+                                <Experience myClass={characterData.class} />
                             </Suspense>
                         </Canvas>
                         <Loader />
@@ -121,7 +120,7 @@ export default function Character() {
                                     Class
                                 </h2>
                                 <p className='text-black'>
-                                    {characterData.myClass}
+                                    {characterData.class}
                                 </p>
                             </div>
                             <div className='flex flex-col w-full md:w-1/2'>

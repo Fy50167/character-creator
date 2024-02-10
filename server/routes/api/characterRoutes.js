@@ -10,8 +10,8 @@ const {
 
 router.route('/').post(createCharacter);
 
-router.route('/:currentClass').get(getCharacters);
+router.route('/class/:currentClass').get(getCharacters);
 
-router.route('/:characterId').get(getSingleCharacter).put(updateCharacter).delete(deleteCharacter);
+router.route('/:characterId').get(getSingleCharacter).delete(deleteCharacter);
    
 module.exports = router;

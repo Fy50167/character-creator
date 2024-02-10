@@ -62,7 +62,7 @@ export const getMe = (token) => {
   };
 
   export const getCharacters = (currentClass) => {
-    return fetch(`/api/character/${currentClass}`);
+    return fetch(`/api/character/class/${currentClass}`);
   }
 
   export const deleteCharacter = (characterId, userId) => {
