@@ -30,7 +30,8 @@ export default function Card({ url, ...props }) {
         );
     });
 
-    const goToHere = () => {
+    const goToHere = (event) => {
+        event.stopPropagation();
         navigate(`/categories/${props.className}`);
     };
 
