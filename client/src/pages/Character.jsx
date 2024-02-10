@@ -42,6 +42,7 @@ export default function Character() {
                 }
 
                 const character = await response.json();
+                console.log(character);
                 setCharacterData(character);
                 setCreatedDate(character.createdDate);
             } catch (err) {
@@ -53,7 +54,6 @@ export default function Character() {
     }, []);
 
     formattedDate = new Date(createdDate).toLocaleDateString('en-US');
-    console.log(characterData);
 
     return (
         <div className='w-full grow flex justify-center items-center'>
