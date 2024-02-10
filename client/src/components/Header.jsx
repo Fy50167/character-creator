@@ -1,9 +1,10 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { NavLink } from 'react-router-dom';
 import Navigation from './Navigation';
 import LOGO from '../assets/images/logo.png';
+import { getMe } from '../utils/API';
 import Auth from '../utils/auth';
 
 function classNames(...classes) {
@@ -11,6 +12,34 @@ function classNames(...classes) {
 }
 
 export default function Header() {
+    const [userData, setUserData] = useState({});
+    const userDataLength = Object.keys(userData).length;
+
+    useEffect(() => {
+        const getUserData = async () => {
+            try {
+                const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+                if (!token) {
+                    return false;
+                }
+
+                const response = await getMe(token);
+
+                if (!response.ok) {
+                    throw new Error('something went wrong!');
+                }
+
+                const user = await response.json();
+                setUserData(user);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        getUserData();
+    }, [userDataLength]);
+
     return (
         <Disclosure as='nav' className='bg-black w-full'>
             {({ open }) => (
@@ -61,7 +90,9 @@ export default function Header() {
                                                 </span>
                                                 <img
                                                     className='h-8 w-8 rounded-full'
-                                                    src={`/stock-image.jpg`}
+                                                    src={
+                                                        userData.profilePicture
+                                                    }
                                                     alt=''
                                                 />
                                             </Menu.Button>

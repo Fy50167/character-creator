@@ -3,6 +3,17 @@ import { getMe, updateUser } from '../utils/API';
 import Auth from '../utils/auth';
 import { useEffect, useState, useRef } from 'react';
 
+const profilePictures = [
+    '/img1_.jpg',
+    '/img2_.jpg',
+    '/img3_.jpg',
+    '/img4_.jpg',
+    '/img5_.jpg',
+    '/img6_.jpg',
+    '/img7_.jpg',
+    '/stock-image.jpg',
+];
+
 export default function Profile() {
     const usernameRef = useRef(null);
     const taglineRef = useRef(null);
@@ -10,6 +21,8 @@ export default function Profile() {
     const userDataLength = Object.keys(userData).length;
     const [username, setUsername] = useState('');
     const [tagline, setTagline] = useState('');
+    const [profilePicture, setProfilePicture] = useState('/stock-image.jpg');
+    const [popup, setPopup] = useState(false);
     const initialRender = useRef(true);
 
     const handleUsernameChange = (input) => {
@@ -22,6 +35,14 @@ export default function Profile() {
 
     const focusInput = (input) => {
         input.current.focus();
+    };
+
+    const showPopup = () => {
+        setPopup(!popup);
+    };
+
+    const changeProfile = (picture) => {
+        setProfilePicture(picture);
     };
 
     useEffect(() => {
@@ -43,6 +64,7 @@ export default function Profile() {
                 setUserData(user);
                 setUsername(user.username);
                 setTagline(user.tagline);
+                setProfilePicture(user.profilePicture);
             } catch (err) {
                 console.error(err);
             }
@@ -61,6 +83,7 @@ export default function Profile() {
                 const response = await updateUser({
                     username: username,
                     tagline: tagline,
+                    profilePicture: profilePicture,
                     userId: userData._id,
                 });
 
@@ -75,7 +98,8 @@ export default function Profile() {
         };
 
         updateUserData();
-    }, [username, tagline, userData]);
+        console.log(profilePicture);
+    }, [username, tagline, profilePicture, userData]);
 
     return (
         <div className='p-4 md:p-8 flex grow w-full h-full flex-col justify-evenly items-center'>
@@ -84,8 +108,9 @@ export default function Profile() {
                 <div className='bg-white w-4/5 h-auto md:h-1/3 p-4 rounded-md flex flex-col md:flex-row'>
                     <div className='w-full md:w-1/2 p-4'>
                         <img
-                            src={userData.profilePicture}
-                            className='m-auto h-auto w-1/2 circle image'
+                            src={profilePicture}
+                            className='m-auto circle image hover:cursor-pointer'
+                            onClick={() => showPopup()}
                         />
                     </div>
 
@@ -170,6 +195,20 @@ export default function Profile() {
                             ))}
                 </div>
             </div>
+            {popup && (
+                <div className='popup' onClick={showPopup}>
+                    <div className='popup-content justify-center md:justify-start'>
+                        {profilePictures.map((picture) => (
+                            <img
+                                src={picture}
+                                key={picture}
+                                onClick={() => changeProfile(picture)}
+                                className='profile-picture'
+                            />
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
