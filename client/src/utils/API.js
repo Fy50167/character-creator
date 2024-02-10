@@ -60,3 +60,13 @@ export const getMe = (token) => {
   export const getCharacter = (characterId) => {
     return fetch(`/api/character/${characterId}`);
   };
+
+  export const deleteCharacter = (characterId, userId) => {
+    return fetch(`/api/character/${characterId}`, { 
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId }), 
+    });
+  };

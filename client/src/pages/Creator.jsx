@@ -71,14 +71,14 @@ export default function Creator() {
     return (
         <div className='w-full grow flex justify-center items-center'>
             <div className='bg-white relative flex flex-col my-8 pb-12 md:m-auto w-5/6 character-div h-auto rounded-md'>
-                <div className='absolute bottom-0 h-12 text-right creator-top center'>
+                <div className='absolute bottom-0 h-12 text-right creator-top center flex items-center justify-end'>
                     <button>
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
                             className='h-8 w-8 save-icon'
                             fill='grey'
                             viewBox='0 0 24 24'
-                            stroke='currentColor'
+                            stroke='black'
                             strokeWidth={2}
                             onClick={submitCharacter}
                         >
