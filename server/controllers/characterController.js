@@ -4,7 +4,9 @@ const { User, Character } = require('../models');
 module.exports = {
     async getCharacters(req, res) {
         try {
-            const character = await Character.find().select('-__v');
+            const character = await Character.find({
+              class: req.params.class
+            }).select('-__v');
 
             res.json(character);
         } catch (err) {

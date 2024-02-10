@@ -31,7 +31,7 @@ export default function Card({ url, ...props }) {
     });
 
     const goToHere = () => {
-        navigate('/new-route');
+        navigate(`/categories/${props.className}`);
     };
 
     return (
@@ -42,7 +42,7 @@ export default function Card({ url, ...props }) {
             side={THREE.DoubleSide}
             onPointerOver={pointerOver}
             onPointerOut={pointerOut}
-            onClick={goToHere}
+            onPointerDown={goToHere}
             {...props}
         >
             <bentPlaneGeometry args={[0.1, 1, 1, 20, 20]} />

@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Creator from './pages/Creator';
 import Profile from './pages/Profile';
+import Categories from './pages/Categories';
 import Character from './pages/Character';
 
 const router = createBrowserRouter([
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
             {
                 path: '/character/:characterId',
                 element: <Character />,
+            },
+            {
+                path: '/categories/:currentClass',
+                element: <Categories />,
             },
         ],
     },
