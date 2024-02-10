@@ -2,14 +2,13 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { loginUser } from '../utils/API';
 import Auth from '../utils/auth';
+import Swal from 'sweetalert2';
 
 const Login = (props) => {
     const [userFormData, setUserFormData] = useState({
         email: '',
         password: '',
     });
-    const [validated] = useState(false);
-    const [showAlert, setShowAlert] = useState(false);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -19,17 +18,37 @@ const Login = (props) => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
+        if (Object.values(userFormData).some((value) => value === '')) {
+            Swal.fire({
+                title: `Whoops!`,
+                text: `It looks like one or more of the fields are empty.`,
+                icon: 'error',
+                confirmButtonText: 'Confirm',
+            });
+            setUserFormData({
+                username: '',
+                email: '',
+                password: '',
+            });
+            return;
         }
 
         try {
             const response = await loginUser(userFormData);
 
             if (!response.ok) {
-                throw new Error('something went wrong!');
+                Swal.fire({
+                    title: `Whoops!`,
+                    text: `Looks like one of your fields was incorrect.`,
+                    icon: 'error',
+                    confirmButtonText: 'Confirm',
+                });
+                setUserFormData({
+                    username: '',
+                    email: '',
+                    password: '',
+                });
+                return;
             }
 
             const { token, user } = await response.json();
