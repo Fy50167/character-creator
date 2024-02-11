@@ -20,4 +20,4 @@ npm install
 npm run dev
 ```
 
-Alternatively, the deployed application can be viewed at the following link: [Website link](https://www.francisyang.com)
+Alternatively, the deployed application can be viewed at the following link: [Website link](https://my-character-creator-4239e0cc94e4.herokuapp.com)
